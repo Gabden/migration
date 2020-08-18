@@ -5,6 +5,7 @@ import ru.gabdulin.migration.main.models.newer.address.BillingAddress;
 import ru.gabdulin.migration.main.models.newer.address.ShippingAddress;
 import ru.gabdulin.migration.main.models.newer.cart.Cart;
 import ru.gabdulin.migration.main.models.newer.favorites.Favorite;
+import ru.gabdulin.migration.main.models.newer.order.Order;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class User {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<Order> orders;
 
     @Transient
     private String token;

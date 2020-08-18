@@ -5,9 +5,11 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 @Entity
+@Table(name = "product_image")
 public class ProductImage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "image_id")
     private Long imageId;
 
     @Column(name = "file_name")
@@ -20,8 +22,8 @@ public class ProductImage implements Serializable {
     @Column(name = "file_data")
     private byte[] fileData;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "productId")
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public ProductImage(String fileName, String contentType, byte[] bytes, Product product) {

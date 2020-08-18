@@ -11,6 +11,7 @@ import ru.gabdulin.migration.main.repos.old.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/migration")
@@ -23,6 +24,11 @@ public class ProductController {
         this.newProductRepo = newProductRepo;
     }
 
+    @RequestMapping("/product/1")
+    public ResponseEntity getProduct(){
+       Optional<ru.gabdulin.migration.main.models.newer.product.Product> product = newProductRepo.findById(1L);
+       return ResponseEntity.ok(product.get());
+    }
     @RequestMapping("/products")
     public ResponseEntity migrateProducts(){
         Iterable<Product> oldProducts = oldProductRepository.findAll();
@@ -35,7 +41,6 @@ public class ProductController {
             newProduct.setProductPrice(product.getProductPrice());
             //details
             ProductDetails productDetails = new ProductDetails();
-            productDetails.setProduct(newProduct);
             productDetails.setProductAlcoholColor(product.getProductAlcoholColor());
             productDetails.setProductAlcoholDegree(product.getProductAlcoholDegree());
             productDetails.setProductAlcoholSort(product.getProductAlcoholSort());
@@ -52,7 +57,6 @@ public class ProductController {
             newProduct.setProductDetails(productDetails);
             //image
             ru.gabdulin.migration.main.models.newer.product.ProductImage newImage = new ru.gabdulin.migration.main.models.newer.product.ProductImage();
-            newImage.setProduct(newProduct);
             List<ProductImage> images = new ArrayList<>(product.getProductImageSet());
             newImage.setFileData(images.get(0).getFileData());
             newImage.setFileName(images.get(0).getFileName());

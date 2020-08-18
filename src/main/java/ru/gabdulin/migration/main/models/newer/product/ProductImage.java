@@ -22,24 +22,12 @@ public class ProductImage implements Serializable {
     @Column(name = "file_data")
     private byte[] fileData;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     public ProductImage(String fileName, String contentType, byte[] bytes, Product product) {
         this.fileName = fileName;
         this.fileType = contentType;
         this.fileData = bytes;
-        this.product = product;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 
     public ProductImage() {
     }
@@ -89,7 +77,6 @@ public class ProductImage implements Serializable {
                 ", fileName='" + fileName + '\'' +
                 ", fileType='" + fileType + '\'' +
                 ", fileData=" + Arrays.toString(fileData) +
-                ", product=" + product +
                 '}';
     }
 }

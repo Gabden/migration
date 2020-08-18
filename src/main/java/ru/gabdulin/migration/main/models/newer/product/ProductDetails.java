@@ -38,19 +38,7 @@ public class ProductDetails implements Serializable {
     @Column(name = "product_unit_in_stock")
     private String productUnitInStock;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     public ProductDetails() {
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public Long getId() {

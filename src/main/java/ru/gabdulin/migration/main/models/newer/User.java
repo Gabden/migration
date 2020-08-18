@@ -44,15 +44,15 @@ public class User {
     @JoinColumn(name = "billing_address_id")
     private BillingAddress billingAddress;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.ALL})
     private List<Favorite> favorites;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<Order> orders;
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.ALL})
+    private List<Order> orderTable;
 
     @Transient
     private String token;
@@ -66,6 +66,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public List<Order> getOrderTable() {
+        return orderTable;
+    }
+
+    public void setOrderTable(List<Order> orderTable) {
+        this.orderTable = orderTable;
     }
 
     public void setId(long id) {

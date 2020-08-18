@@ -29,20 +29,9 @@ public class BillingAddress implements Serializable {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "id")
-    private User user;
-
     public BillingAddress() {
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public long getBillingAddressId() {
         return billingAddressId;
